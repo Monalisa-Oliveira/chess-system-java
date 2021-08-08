@@ -21,6 +21,11 @@ public class Main {
 				System.out.println();
 				System.out.println("Posição de origem: ");
 				ChessPosition source = UI.readChessPosition(sc);
+				
+				boolean [][] possibleMoves = match.possibleMoves(source); 
+				UI.clearScreen();
+				UI.printBoard(match.getPieces(), possibleMoves);
+				
 				System.out.println("Posição de destino: ");
 				ChessPosition target = UI.readChessPosition(sc);
 				ChessPiece capturedPiece = match.performChessMovie(source, target);
