@@ -16,42 +16,45 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		ChessMatch match = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
-		
-		while(!match.getCheckMate()) {
+
+		while (!match.getCheckMate()) {
 			try {
 				UI.clearScreen();
 				UI.printMatch(match, captured);
 				System.out.println();
 				System.out.println("Posição de origem: ");
 				ChessPosition source = UI.readChessPosition(sc);
-				
-				boolean [][] possibleMoves = match.possibleMoves(source); 
+
+				boolean[][] possibleMoves = match.possibleMoves(source);
 				UI.clearScreen();
 				UI.printBoard(match.getPieces(), possibleMoves);
-				
+
 				System.out.println("Posição de destino: ");
 				ChessPosition target = UI.readChessPosition(sc);
 				ChessPiece capturedPiece = match.performChessMovie(source, target);
-				if(capturedPiece != null) {
+				if (capturedPiece != null) {
 					captured.add(capturedPiece);
 				}
-				
-			}
-			catch(ChessException e) {
+
+				if (match.getPromoted() != null) {
+					System.out.print("Enter piece for promotion (B/N/R/Q): ");
+					String type = sc.nextLine();
+					match.replacePromotedPiece(type);
+				}
+
+			} catch (ChessException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine();
+			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
 			}
-			catch(InputMismatchException e) {
-				System.out.println(e.getMessage());
-				sc.nextLine();
-			}
-			
 
 		}
-		
+
 		UI.clearScreen();
 		UI.printMatch(match, captured);
-		
+
 	}
 
 }
