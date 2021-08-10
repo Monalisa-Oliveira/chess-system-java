@@ -37,8 +37,12 @@ public class Main {
 				}
 
 				if (match.getPromoted() != null) {
-					System.out.print("Enter piece for promotion (B/N/R/Q): ");
-					String type = sc.nextLine();
+					System.out.print("Escolha uma peça para a promoção (B/C/R/Q): ");
+					String type = sc.nextLine().toUpperCase();
+					while (!type.equals("B") && !type.equals("C") && !type.equals("R") & !type.equals("Q")) {
+						System.out.print("Valor inválido! Escolha uma peça para a promoção (B/C/R/Q): ");
+						type = sc.nextLine().toUpperCase();
+					}
 					match.replacePromotedPiece(type);
 				}
 

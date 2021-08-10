@@ -121,8 +121,8 @@ public class ChessMatch {
 		if (promoted == null) {
 			throw new IllegalStateException("There is no piece to be promoted");
 		}
-		if (!type.equals("B") && !type.equals("N") && !type.equals("R") & !type.equals("Q")) {
-			throw new InvalidParameterException("Invalid type for promotion");
+		if (!type.equals("B") && !type.equals("C") && !type.equals("R") & !type.equals("Q")) {
+			return promoted;
 		}
 
 		Position pos = promoted.getChessPosition().toPosition();
@@ -138,7 +138,7 @@ public class ChessMatch {
 
 	private ChessPiece newPiece(String type, Color color) {
 		if (type.equals("B")) return new Bishop(board, color);
-		if (type.equals("N")) return new Knight(board, color);
+		if (type.equals("C")) return new Knight(board, color);
 		if (type.equals("Q")) return new Queen(board, color);
 		return new Rook(board, color);
 	}
